@@ -1,0 +1,60 @@
+---
+openapi: 3.0.0
+info:
+  title: Increment API
+  version: 1.0.0
+  description: Increment API implemented with OpenAPI Codegen
+tags:
+  - name: "Increment"
+paths:
+  /increment/{givenNumber}:
+    get:
+      summary: This is summary
+      tags:
+        - "Increment"
+      description: Get the incremented number
+      operationId: incrementTheNumber
+      parameters:
+        - in: path
+          name: givenNumber
+          description: "The given number to be incremented"
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: incrementer
+          description: "The provided incrementer to increment the given number"
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: integer
+                properties:
+                  message:
+                    type: string
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Required parameter missing or invalid format
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Route Not Found
+
